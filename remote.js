@@ -51,7 +51,9 @@ var storage = (function () {
   // remoteStorage provider.
   function authorize(scopes) {
     var storageInfo = JSON.parse(localStorage.getItem('userStorageInfo'));
-    var redirectUri = location.protocol + '//' + location.host + '/remotepic/receive_token.html';
+    var path = location.pathname;
+    var dir = path.substr(0 , path.lastIndexOf('/') + 1);
+    var redirectUri = location.protocol + '//' + location.host + dir + '/receive_token.html';
 
     // `createOAuthAddress` takes the `storageInfo`, the scopes that we
     // intend to access and a redirect URI that the storage provider sends the

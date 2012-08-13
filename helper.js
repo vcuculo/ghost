@@ -36,6 +36,7 @@ var helper = (function () {
       $('#disconnect').show();
       $('#userAddress').val(localStorage.getItem('userAddress'));
       $('#splash').hide();
+      $('#info').hide();
       $('#login').css({
         "position": "fixed",
         "right": "10px",
@@ -46,6 +47,7 @@ var helper = (function () {
     } else {
       deauthorize();
       stopVideo();
+      helper.hideSpinner();
       $('#connect').show();
       $('#disconnect').hide();
       $('#userAddress').val('');
@@ -56,6 +58,7 @@ var helper = (function () {
         $('#login').removeAttr('style');
         $('#userAddress').removeAttr('disabled');
         $('#splash').fadeIn('slow');
+        $('#info').fadeIn('slow');
       });
     }
   }

@@ -12,6 +12,25 @@ body {
  z-index: 2;
 }
 
+#info {
+ position: relative;
+ margin: 30px;
+ font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
+ color: #504f4f;
+ text-shadow: 0px 2px 1px #bbbaba;
+ text-align: center;
+}
+
+#info a{
+ color: #504f4f;
+ font-weight: bold;
+ text-decoration: none;
+}
+
+#info a:hover {
+ text-shadow: 3px 3px 2px #a5b8da;
+}
+
 input {
  border: 2px solid #dadada;
  border-radius: 7px;
@@ -26,7 +45,6 @@ input:focus {
 
 #spinner {
  margin: 10px;
- box-shadow: 3px 3px 7px #000;
 }
 
 #splash img {
@@ -37,18 +55,18 @@ input:focus {
 }
 
 .title {
+ position: absolute;
  font-family: 'Metal Mania';
  font-size: 50pt;
- position: absolute;
  text-shadow: 0 0 5px #fff;
  top: 150px;
 }
 
 .subtitle {
+ position: absolute;
  color: #fff;
  font-family: 'Metal Mania';
  font-size: 20pt;
- position: absolute;
  text-shadow: 2px 2px 3px #000;
  top: 220px;
 }
