@@ -1,0 +1,54 @@
+body {
+ background-color: #ababab;
+}
+
+#camerabox {
+ left: 50%;
+ margin-left: -170px;
+ margin-top: -270px;
+ position: fixed;
+ top: 50%;
+ width: 340px;
+ z-index: 2;
+}
+
+input {
+ border: 2px solid #dadada;
+ border-radius: 7px;
+ padding: 5px;
+}
+
+input:focus {
+ border-color: #a5b8da;
+ box-shadow: 0 0 10px #a5b8da;
+ outline: none;
+}
+
+#spinner {
+ margin: 10px;
+ box-shadow: 3px 3px 7px #000;
+}
+
+#splash img {
+ box-shadow: 3px 3px 7px #777;
+ margin: 22px 0;
+ vertical-align: middle;
+ -webkit-transform: rotate(-30deg);
+}
+
+.title {
+ font-family: 'Metal Mania';
+ font-size: 50pt;
+ position: absolute;
+ text-shadow: 0 0 5px #fff;
+ top: 150px;
+}
+
+.subtitle {
+ color: #fff;
+ font-family: 'Metal Mania';
+ font-size: 20pt;
+ position: absolute;
+ text-shadow: 2px 2px 3px #000;
+ top: 220px;
+}
