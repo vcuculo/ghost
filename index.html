@@ -1,0 +1,88 @@
+<html>  
+  <head>
+    <title>gHost - unHosted Photo Album using WebRTC</title>
+    <link href="css/lightbox.css" rel="stylesheet" />
+    <link href="css/ghost.css" rel="stylesheet" />
+    <link href="css/buttons.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Metal+Mania' rel='stylesheet' type='text/css'>
+    <script src="js/remoteStorage.js" type="text/javascript"></script>
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="remote.js" type="text/javascript"></script>
+    <script src="helper.js" type="text/javascript"></script>
+    <script src="app.js" type="text/javascript"></script>
+    <script src="js/lightbox.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var picture_key;
+      var myStream;
+
+      function getPic(error, data) {
+        if (!error && data !== undefined) {
+          $('#album').append('<a href="' + data + '" rel="lightbox[gHost]"><img src="' + data + '" id="' + picture_key + '" width="160" height="120"></img></a>');
+          /* Canvas loose some pics :(
+          $('#album').append('<a href="'+data+'" rel="lightbox[gHost]"><canvas id="'+picture_key+'" width="160" height="120"></canvas></a>');
+	  var ctx = document.getElementById(picture_key).getContext("2d");
+	  var myImage = new Image();
+	  myImage.src = data;
+	  ctx.drawImage(myImage, 0, 0, 160, 120);
+          */
+          picture_key = picture_key + 1;
+          
+          /* recursive discovery of category, since I guess remotestoragejs
+          does not include a category listing method yet
+          */
+          storage.getData('pictures/ghost/' + picture_key, getPic);
+        } else {
+          helper.hideSpinner();
+          $('#takePhoto').removeAttr('hidden', 'hidden');
+        }
+      }
+
+      function init() {
+        if (helper.isConnected()) {
+          if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({
+            video: true
+          }, onSuccess, onFail);
+          else alert('webRTC not available');
+        }
+      }
+
+      function onSuccess(stream) {
+        myStream = stream;
+        $('#camFeed').attr('src', webkitURL.createObjectURL(stream));
+        $('#camFeed').css({
+          'margin-top': '10px',
+          'margin-bottom': '20px',
+          'box-shadow': '0 0 50px 10px #fff'
+        });
+        $('#camerabox').fadeIn('slow')
+      }
+
+      function onFail() {
+        alert('could not connect stream');
+      }
+    </script>
+  </head>
+  
+  <body>
+    <center>
+      <div id="splash">
+        <img src="images/logo.png">
+        <span class="title">gHost</span>
+        <span class="subtitle">unHosted Photo Album</span>
+        </span>
+      </div>
+      <div id="login">
+        <input type="text" id="userAddress" placeholder="user@remotestorage.com">
+        <button class="blue-pill" id="connect">Connect</button>
+        <button class="blue-pill" id="disconnect" hidden>Disconnect</button>
+      </div>
+      <div id="camerabox" style="display:none">
+        <video id="camFeed" width="320" height="240" autoplay></video>
+        <button class="blue-pill" id="takePhoto" hidden>Take Photo</button>
+        <button class="blue-pill" id="savePhoto" hidden>Save Photo</button>
+      </div>
+      <img id="spinner" src="images/ajax-loader.gif" style="display:none">
+    </center>
+  </body>
+
+</html>
