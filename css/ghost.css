@@ -3,10 +3,8 @@ body {
 }
 
 #login {
- position: absolute;
+ position: relative;
  top: 300px;
- left: 50%;
- margin-left: -170px;
  font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
  z-index: 0;
 }
@@ -36,7 +34,7 @@ body {
  left: 50%;
  width: 420px;
  margin-left: -210px;
- top: 330px;
+ top: 350px;
  font: 16px Tahoma, Helvetica, Arial, Sans-Serif;
  color: #504f4f;
  text-shadow: 0px 2px 1px #bbbaba;
@@ -66,7 +64,11 @@ input:focus {
 }
 
 #spinner {
- margin: 10px;
+ position: fixed;
+ top: 350px;
+ width: 43px;
+ left: 50%;
+ margin-left: -21px;
 }
 
 #splash img {
