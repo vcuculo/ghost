@@ -3,7 +3,12 @@ body {
 }
 
 #login {
+ position: absolute;
+ top: 300px;
+ left: 50%;
+ margin-left: -170px;
  font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
+ z-index: 0;
 }
 
 #question {
@@ -27,8 +32,11 @@ body {
 }
 
 #info {
- position: relative;
- margin: 30px;
+ position: absolute;
+ left: 50%;
+ width: 420px;
+ margin-left: -210px;
+ top: 330px;
  font: 16px Tahoma, Helvetica, Arial, Sans-Serif;
  color: #504f4f;
  text-shadow: 0px 2px 1px #bbbaba;
@@ -62,18 +70,22 @@ input:focus {
 }
 
 #splash img {
+ position: absolute;
+ left: 50%;
+ margin-left: -100px;
+ margin-top: 30px;
  box-shadow: 3px 3px 7px #777;
- margin: 22px 0;
- vertical-align: middle;
  -webkit-transform: rotate(-30deg);
+ z-index: 1;
 }
 
 .title {
  position: absolute;
  font-family: 'Metal Mania';
  font-size: 50pt;
- text-shadow: 0 0 5px #fff;
+ text-shadow: 0 0 20px #fff;
  top: 150px;
+ z-index: 2;
 }
 
 .subtitle {
@@ -83,4 +95,5 @@ input:focus {
  font-size: 20pt;
  text-shadow: 2px 2px 3px #000;
  top: 220px;
+ z-index: 2;
 }
