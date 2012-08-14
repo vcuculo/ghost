@@ -11,6 +11,9 @@
     <script src="helper.js" type="text/javascript"></script>
     <script src="app.js" type="text/javascript"></script>
     <script src="js/lightbox.js" type="text/javascript"></script>
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
     <script type="text/javascript">
       var picture_key;
       var myStream;
@@ -76,6 +79,10 @@
         <input type="text" id="userAddress" placeholder="user@remotestorage.com">
         <button class="blue-pill" id="connect">Connect</button>
         <button class="blue-pill" id="disconnect" hidden>Disconnect</button>
+        <br>
+
+
+
       </div>
       <div id="camerabox" style="display:none">
         <video id="camFeed" width="320" height="240" autoplay></video>
@@ -94,5 +101,8 @@
       </div>
     </center>
   </body>
-
+  <script>
+  var options={ "publisher": "ur-45cabb71-babe-bd30-6be0-d0f0d1a4e87d", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "googleplus", "pinterest"]}};
+  var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+  </script>
 </html>
