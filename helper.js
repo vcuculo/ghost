@@ -37,6 +37,7 @@ var helper = (function () {
       $('#userAddress').val(localStorage.getItem('userAddress'));
       $('#splash').hide();
       $('#info').hide();
+      $('#question').hide();
       $('#login').css({
         "position": "fixed",
         "right": "10px",
@@ -59,6 +60,7 @@ var helper = (function () {
         $('#userAddress').removeAttr('disabled');
         $('#splash').fadeIn('slow');
         $('#info').fadeIn('slow');
+        $('#question').show();
       });
     }
   }
