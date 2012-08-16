@@ -77,7 +77,11 @@ input:focus {
  margin-left: -100px;
  margin-top: 30px;
  box-shadow: 3px 3px 7px #777;
- -webkit-transform: rotate(-30deg);
+ transform: rotate(30deg);
+ -ms-transform: rotate(30deg); /* IE 9 */
+ -webkit-transform: rotate(30deg); /* Safari and Chrome */
+ -o-transform: rotate(30deg); /* Opera */
+ -moz-transform: rotate(30deg); /* Firefox */
  z-index: 1;
 }
 

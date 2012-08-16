@@ -55,7 +55,7 @@ var helper = (function () {
       $('#camerabox').fadeOut('slow', function () {
         $('#album').remove();
         $('#photo').remove();
-        $('#savePhoto').attr('hidden', 'hidden');
+        $('#savePhoto').hide();
         $('#login').removeAttr('style');
         $('#userAddress').removeAttr('disabled');
         $('#splash').fadeIn('slow');

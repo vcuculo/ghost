@@ -36,7 +36,7 @@
           storage.getData('pictures/ghost/' + picture_key, getPic);
         } else {
           helper.hideSpinner();
-          $('#takePhoto').removeAttr('hidden', 'hidden');
+          $('#takePhoto').show();
         }
       }
 
@@ -77,7 +77,7 @@
         <a id="question" href="#" onClick="window.open('http://unhosted.org/en/a/register.html','Get your remote storage','width=820,height=800,top=0,left=0');">?</a>
         <input type="text" id="userAddress" placeholder="user@remotestorage.com">
         <button class="blue-pill" id="connect">Connect</button>
-        <button class="blue-pill" id="disconnect" hidden>Disconnect</button>
+        <button class="blue-pill" id="disconnect" style="display: none">Disconnect</button>
         <br>
 
 
@@ -85,8 +85,8 @@
       </div>
       <div id="camerabox" style="display:none">
         <video id="camFeed" width="320" height="240" autoplay></video>
-        <button class="blue-pill" id="takePhoto" hidden>Take Photo</button>
-        <button class="blue-pill" id="savePhoto" hidden>Save Photo</button>
+        <button class="blue-pill" id="takePhoto" style="display: none">Take Photo</button>
+        <button class="blue-pill" id="savePhoto" style="display: none">Save Photo</button>
       </div>
       <img id="spinner" src="images/ajax-loader.gif" style="display:none">
       <div id="info">

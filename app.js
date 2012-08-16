@@ -69,7 +69,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         scrollTop: $(document).height()
       }, "slow");
 
-      $('#savePhoto').removeAttr("hidden");
+      $('#savePhoto').show();
 
       return false;
     });
@@ -92,7 +92,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           });
 
           picture_key = picture_key + 1;
-          $('#savePhoto').attr('hidden', 'hidden');
+          $('#savePhoto').hide();
         }
       });
 
