@@ -67,7 +67,7 @@ var helper = (function () {
 
   function stopVideo() {
     var video = document.getElementById("camFeed");
-    video.pause();
+    if (video) video.pause();
     if (myStream) myStream.stop();
   }
 

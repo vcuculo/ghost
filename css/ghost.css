@@ -4,7 +4,7 @@ body {
 
 #login {
  position: relative;
- top: 300px;
+ top: 40px;
  font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
  z-index: 0;
 }
@@ -72,10 +72,9 @@ input:focus {
 }
 
 #splash img {
- position: absolute;
- left: 50%;
- margin-left: -100px;
- margin-top: 30px;
+ position: relative;
+ top: 30px;
+ left: 200px;
  box-shadow: 3px 3px 7px #777;
  transform: rotate(-30deg);
  -ms-transform: rotate(-30deg); /* IE 9 */
@@ -86,20 +85,22 @@ input:focus {
 }
 
 .title {
- position: absolute;
+ position: relative;
  font-family: 'Metal Mania';
  font-size: 50pt;
  text-shadow: 0 0 20px #fff;
- top: 150px;
+ top: -10px;
+ left: 10px;
  z-index: 2;
 }
 
 .subtitle {
- position: absolute;
+ position: relative;
  color: #fff;
  font-family: 'Metal Mania';
  font-size: 20pt;
  text-shadow: 2px 2px 3px #000;
- top: 220px;
+ top: 20px;
+ left: -180px;
  z-index: 2;
 }
