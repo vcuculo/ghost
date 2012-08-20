@@ -63,6 +63,14 @@
       function onFail() {
         alert('could not connect stream');
       }
+
+      if(window.location.href.indexOf('#access_token') > 0) {
+        window.location.replace(location.protocol + '//' + location.host + location.pathname);
+        var token = remoteStorage.receiveToken();
+        console.log('Received an OAuth token: ' + token);
+        localStorage.setItem('bearerToken', token);
+        helper.setAuthorizedState(helper.isAuthorized());
+      }
     </script>
   </head>
   

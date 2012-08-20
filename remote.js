@@ -51,9 +51,7 @@ var storage = (function () {
   // remoteStorage provider.
   function authorize(scopes) {
     var storageInfo = JSON.parse(localStorage.getItem('userStorageInfo'));
-    var path = location.pathname;
-    var dir = path.substr(0 , path.lastIndexOf('/') + 1);
-    var redirectUri = location.protocol + '//' + location.host + dir + '/receive_token.html';
+    var redirectUri = location.protocol + '//' + location.host + location.pathname;
 
     // `createOAuthAddress` takes the `storageInfo`, the scopes that we
     // intend to access and a redirect URI that the storage provider sends the
@@ -63,7 +61,7 @@ var storage = (function () {
     // That page extracts the token and sends it back to us, which is
     // [described here](token.html).
     var oauthPage = remoteStorage.createOAuthAddress(storageInfo, scopes, redirectUri);
-    var popup = window.open(oauthPage);
+    window.location.replace(oauthPage);
   }
 
   // To get the OAuth token we listen for the `message` event from the
