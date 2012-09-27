@@ -26,6 +26,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 var helper = (function () {
   var connected = false;
   var authorized = false;
+  var count;
 
   function setConnectionState(state) {
     connected = state;
@@ -81,14 +82,62 @@ var helper = (function () {
     setConnectionState(false);
   }
 
+  function getPic(error, data) {
+    if (!error && data !== undefined) {
+
+      $('#album').append('<span onmouseover="helper.showActions('+ picture_key +')" onmouseout="helper.hideActions('+ picture_key +')"><a href="' + data + '" rel="lightbox[gHost]"><img src="' + data + '" id="' + picture_key + '" width="160" height="120"></img></a><span class="actions" id="'+ picture_key+'-actions"><a href="'+ data +'" download="gHost_'+ picture_key +'" title="Download this!"><img class="download" src="images/download.png"></img></a></span></span>');
+
+    }
+    if (picture_key < count) {
+      picture_key ++;
+      storage.getData('pictures/ghost/' + picture_key, getPic);
+    }
+    else {      
+      helper.hideSpinner();
+      $('#takePhoto').show();
+    }
+  }
+
+  function getAllPics() {
+      $('body').append('<div id="album" style="z-index:1"></div>');
+      helper.showSpinner();
+
+      picture_key = 1; 
+      storage.getData('pictures/ghost/' + picture_key, getPic);
+  }
+
+  function getCount() {
+    storage.getData('pictures/ghost/' + picture_key, function (error, data) {
+
+      if (data == undefined){
+        count = picture_key - 1;
+        storage.putData('pictures/ghost/count', count.toString(), function(e){});
+        helper.hideSpinner();
+        getAllPics();
+      }
+      else {
+        picture_key ++;
+        getCount();
+      }
+    });
+  }
+
   function setAuthorizedState(state) {
     authorized = state;
 
     if (authorized) {
-      picture_key = 1;
-      storage.getData('pictures/ghost/' + picture_key, getPic);
-      $('body').append('<div id="album" style="z-index:1"></div>');
-      helper.showSpinner();
+      storage.getData('pictures/ghost/count', function (error, data) {
+
+        if (data == undefined) { // count is not present
+          helper.showSpinner();
+          picture_key = 1;
+          getCount();
+        }
+        else {
+          count = data;
+          getAllPics();
+        }
+      });
     }
   }
 
@@ -109,6 +158,14 @@ var helper = (function () {
     $('#spinner').hide();
   }
 
+  function showActions(id) {
+    $('#'+id+'-actions').show();
+  }
+
+  function hideActions(id) {
+    $('#'+id+'-actions').hide();
+  }
+
   function validateHandler(elementValue) {
     var handlerPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return handlerPattern.test(elementValue);
@@ -123,6 +180,8 @@ var helper = (function () {
     deauthorize: deauthorize,
     showSpinner: showSpinner,
     hideSpinner: hideSpinner,
+    showActions: showActions,
+    hideActions: hideActions,
     validateHandler: validateHandler
   };
 })();

@@ -18,27 +18,6 @@
       var picture_key;
       var myStream;
 
-      function getPic(error, data) {
-        if (!error && data !== undefined) {
-          $('#album').append('<a href="' + data + '" rel="lightbox[gHost]"><img src="' + data + '" id="' + picture_key + '" width="160" height="120"></img></a>');
-          /* Canvas loose some pics :(
-          $('#album').append('<a href="'+data+'" rel="lightbox[gHost]"><canvas id="'+picture_key+'" width="160" height="120"></canvas></a>');
-	  var ctx = document.getElementById(picture_key).getContext("2d");
-	  var myImage = new Image();
-	  myImage.src = data;
-	  ctx.drawImage(myImage, 0, 0, 160, 120);
-          */
-          picture_key = picture_key + 1;
-          
-          /* recursive discovery of category, since I guess remotestoragejs
-          does not include a category listing method yet
-          */
-          storage.getData('pictures/ghost/' + picture_key, getPic);
-        } else {
-          helper.hideSpinner();
-          $('#takePhoto').show();
-        }
-      }
 
       function init() {
         if (helper.isConnected()) {
@@ -83,12 +62,10 @@
       </div>
       <div id="login">
         <a id="question" href="#" onClick="window.open('http://unhosted.org/en/a/register.html','Get your remote storage','width=820,height=800,top=0,left=0');">?</a>
-        <input type="text" id="userAddress" placeholder="user@remotestorage.com">
+        <input type="text" id="userAddress" placeholder="user@remotestorage.com" onkeydown="if(event.keyCode == 13) document.getElementById('connect').click(); ">
         <button class="blue-pill" id="connect">Connect</button>
         <button class="blue-pill" id="disconnect" style="display: none">Disconnect</button>
         <br>
-
-
 
       </div>
       <div id="camerabox" style="display:none">

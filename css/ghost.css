@@ -84,6 +84,15 @@ input:focus {
  z-index: 1;
 }
 
+.actions {
+ display: none;
+}
+
+.download {
+ margin-top: -24px; 
+ margin-left: -24px; 
+}
+
 .title {
  position: relative;
  font-family: 'Metal Mania';

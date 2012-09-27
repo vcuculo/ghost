@@ -76,7 +76,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     $('#savePhoto').on('click', function () {
       var c = document.getElementById('photo');
-      var value = c.toDataURL("image/jpeg"); // encoded picture
+      var value = c. toDataURL("image/jpeg"); // encoded picture
+
+      picture_key = picture_key + 1;
 
       storage.putData('pictures/ghost/' + picture_key, value, function (error) {
 
@@ -91,7 +93,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             $('#photo').remove();
           });
 
-          picture_key = picture_key + 1;
+          storage.putData('pictures/ghost/count', picture_key.toString(), function(e){});
+
           $('#savePhoto').hide();
         }
       });
