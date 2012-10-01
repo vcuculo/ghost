@@ -102,7 +102,7 @@ var helper = (function () {
       $('body').append('<div id="album" style="z-index:1"></div>');
       helper.showSpinner();
 
-      picture_key = 1; 
+      picture_key = 1;
       storage.getData('pictures/ghost/' + picture_key, getPic);
   }
 
@@ -135,7 +135,9 @@ var helper = (function () {
         }
         else {
           count = data;
-          getAllPics();
+
+          if (count > 0)
+            getAllPics();
         }
       });
     }
