@@ -35,24 +35,32 @@ function hideApp() {
 var myStream;
 
 function init() {
-  navigator.getUserMedia || (navigator.getUserMedia = navigator.mozGetUserMedia || navigator.webkitGetUserMedia || navigator.msGetUserMedia);
-  if (navigator.getUserMedia)
-    navigator.getUserMedia({
-      video: true
-    }, onSuccess, onFail);
-  else
+   var video = document.getElementById("camFeed");
+   if(navigator.getUserMedia){
+      navigator.getUserMedia({video : true}, function(stream){
+         video.src = stream;
+         video.play();
+         onSuccess(stream);
+      }, onFail);
+   }else if(navigator.mozGetUserMedia){
+      navigator.mozGetUserMedia({video : true}, function(stream){
+         video.mozSrcObject = stream;
+         video.play();
+         onSuccess(stream);
+      }, onFail);
+
+   }else if(navigator.webkitGetUserMedia){
+      navigator.webkitGetUserMedia({video : true}, function(stream){
+         video.src = window.webkitURL.createObjectURL(stream);
+         onSuccess(stream);
+      }, onFail);
+   }else{
     alert('webRTC is not available on this browser, so you can\'t take pictures. But you can still browse them if they are present in your unhosted account.');
+  }
 }
 
 function onSuccess(stream) {
   myStream = stream;
-  var camsource;
-  if (window.webkitURL) {
-    camsource = window.webkitURL.createObjectURL(stream);
-  } else {
-    camsource = stream; // Opera and Firefox
-  }
-  $('#camFeed').attr('src', camsource);
   $('#camFeed').css({
     'margin-top': '10px',
     'margin-bottom': '20px',
