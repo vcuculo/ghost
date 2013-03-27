@@ -35,8 +35,9 @@ function hideApp() {
 var myStream;
 
 function init() {
-  if (navigator.webkitGetUserMedia)
-    navigator.webkitGetUserMedia({
+  navigator.getUserMedia || (navigator.getUserMedia = navigator.mozGetUserMedia || navigator.webkitGetUserMedia || navigator.msGetUserMedia);
+  if (navigator.getUserMedia)
+    navigator.getUserMedia({
       video: true
     }, onSuccess, onFail);
   else
@@ -45,7 +46,13 @@ function init() {
 
 function onSuccess(stream) {
   myStream = stream;
-  $('#camFeed').attr('src', webkitURL.createObjectURL(stream));
+  var camsource;
+  if (window.webkitURL) {
+    camsource = window.webkitURL.createObjectURL(stream);
+  } else {
+    camsource = stream; // Opera and Firefox
+  }
+  $('#camFeed').attr('src', camsource);
   $('#camFeed').css({
     'margin-top': '10px',
     'margin-bottom': '20px',
