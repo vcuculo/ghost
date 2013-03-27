@@ -2,23 +2,6 @@ body {
  background-color: #ababab;
 }
 
-#login {
- position: relative;
- top: 40px;
- font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
- z-index: 0;
-}
-
-#question {
- color: #504f4f;
- text-decoration: none;
-}
-
-#question:hover {
- color: #000;
- -webkit-transition: color 0.5s ease;
-}
-
 #camerabox {
  left: 50%;
  margin-left: -170px;
@@ -41,10 +24,14 @@ body {
  text-align: center;
 }
 
-#info a{
+a {
  color: #504f4f;
  font-weight: bold;
  text-decoration: none;
+}
+
+.fancybox-title a:hover {
+ color: #fff;
 }
 
 #info a:hover {
@@ -71,6 +58,12 @@ input:focus {
  margin-left: -21px;
 }
 
+#imagespinner {
+ position: relative;
+ top: -54px;
+ left: 67px;
+}
+
 #splash img {
  position: relative;
  top: 30px;
@@ -82,15 +75,6 @@ input:focus {
  -o-transform: rotate(-30deg); /* Opera */
  -moz-transform: rotate(-30deg); /* Firefox */
  z-index: 1;
-}
-
-.actions {
- display: none;
-}
-
-.download {
- margin-top: -24px; 
- margin-left: -24px; 
 }
 
 .title {
