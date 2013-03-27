@@ -40,7 +40,7 @@ function init() {
       video: true
     }, onSuccess, onFail);
   else
-    alert('webRTC is not available on this browser, so you can\'t take pictures. But you can still browse them if they are present in your unhosted account.');
+    alert('WebRTC is not available on this browser, so you can\'t take pictures. But you can still browse the pictures already in your remoteStorage.');
 }
 
 function onSuccess(stream) {
