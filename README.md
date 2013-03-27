@@ -9,4 +9,4 @@ based on HTML5, CSS3 and JavaScript.
 to capture the webcam stream without plugins and
 to host the pictures taken, leaving users in control of their data.
 
-**Demo**: http://vcuculo.github.com/ghost-unhosted-webrtc/
+**Demo**: https://ghost-vcuculo.5apps.com/
