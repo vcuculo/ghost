@@ -1,10 +1,70 @@
+/* remotestorage init */
+
+$(document).ready(function () {
+  remoteStorage.claimAccess({
+    pictures: 'rw'
+  }).then(function () {
+    remoteStorage.displayWidget('remotestorage-connect');
+    remoteStorage.pictures.dontSync();
+    remoteStorage.onWidget('ready', showApp);
+    remoteStorage.onWidget('disconnect', hideApp);
+  });
+});
+
+/* buttons to take and save pictures from webcam */
+
+$(document).on({
+  click: function () {
+    $('#camerabox').append('<canvas id="photo" width="320" height="240"></canvas>');
+
+    $('#photo').css({
+      'margin-top': '20px',
+      'margin-bottom': '10px',
+      'box-shadow': '0 0 50px 10px #fff'
+    });
+
+    var c = document.getElementById('photo');
+    var v = document.getElementById('camFeed');
+    c.getContext('2d').drawImage(v, 0, 0, 320, 240);
+
+    $("html, body").animate({
+      scrollTop: $(document).height()
+    }, "slow");
+
+    $('#savePhoto').show();
+
+    return false;
+  }
+}, '#takePhoto');
+
+$(document).on({
+  click: function () {
+
+    var c = document.getElementById('photo');
+    var type = "image/jpeg";
+    var value = c.toDataURL(type); // base64encoded picture
+    var ab = dataURItoArrayBuffer(value); // arraybuffer picture
+    var uuid = remoteStorage.pictures.getUuid().substring(5);
+    var filename = "camera/" + uuid + ".jpg";
+    $('#photo').fadeOut('slow', function () {
+      $('#photo').remove();
+    });
+    $('#savePhoto').hide();
+    $('#album').append('<span id="imagespinner" width="160" height="120"><img src="images/ajax-loader.gif"></span>');
+    remoteStorage.pictures.setPic(filename, type, ab).then(function (url) {
+      $('#imagespinner').remove();
+      $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + filename + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '"  width="160" height="120" title="' + filename + '"></img></a>').fadeIn('slow');
+      return false;
+    });
+  }
+}, '#savePhoto');
+
+
 function displayPic() {
-  remoteStorage.ghost.getPicsListing().then(function (objects) {
+  remoteStorage.pictures.getPicsListing('camera/').then(function (objects) {
     objects.forEach(function (item) {
-      if (item.indexOf('test') == 0) {
-        var url = remoteStorage.ghost.getPicURL(item);
-        $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + item + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '" id="' + item + '" width="160" height="120" title="' + item + '"></img></a>');
-      }
+      var url = remoteStorage.pictures.getPicURL('camera/' + item);
+      $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + item + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '" id="' + item + '" width="160" height="120" title="' + item + '"></img></a>');
     });
     $(".fancybox").fancybox();
     $('#spinner').hide();
@@ -35,26 +95,32 @@ function hideApp() {
 var myStream;
 
 function init() {
-   var video = document.getElementById("camFeed");
-   if(navigator.getUserMedia){
-      navigator.getUserMedia({video : true}, function(stream){
-         video.src = stream;
-         video.play();
-         onSuccess(stream);
-      }, onFail);
-   }else if(navigator.mozGetUserMedia){
-      navigator.mozGetUserMedia({video : true}, function(stream){
-         video.mozSrcObject = stream;
-         video.play();
-         onSuccess(stream);
-      }, onFail);
+  var video = document.getElementById("camFeed");
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia({
+      video: true
+    }, function (stream) {
+      video.src = stream;
+      video.play();
+      onSuccess(stream);
+    }, onFail);
+  } else if (navigator.mozGetUserMedia) {
+    navigator.mozGetUserMedia({
+      video: true
+    }, function (stream) {
+      video.mozSrcObject = stream;
+      video.play();
+      onSuccess(stream);
+    }, onFail);
 
-   }else if(navigator.webkitGetUserMedia){
-      navigator.webkitGetUserMedia({video : true}, function(stream){
-         video.src = window.webkitURL.createObjectURL(stream);
-         onSuccess(stream);
-      }, onFail);
-   }else{
+  } else if (navigator.webkitGetUserMedia) {
+    navigator.webkitGetUserMedia({
+      video: true
+    }, function (stream) {
+      video.src = window.webkitURL.createObjectURL(stream);
+      onSuccess(stream);
+    }, onFail);
+  } else {
     alert('WebRTC is not available on this browser, so you can\'t take pictures. But you can still browse the pictures already in your remoteStorage.');
   }
 }

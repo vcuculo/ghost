@@ -1,27 +1,29 @@
-remoteStorage.defineModule('ghost', function(privateClient, publicClient) {
+remoteStorage.defineModule('pictures', function(privateClient, publicClient) {
   return {
-    name: "gHost",
+    name: "pictures",
 
     dataHints: {
-      "module" : "Take and save pictures from your webcam"
+      "module" : "Picture module needs a definition, here!"
     },
 
     exports: {
       dontSync: function() {
+        privateClient.use('', true);
         publicClient.use('', true);
       },
       setPic: function (filename, mimetype, data) {
-        return publicClient.storeFile(mimetype, filename, data, false).then(function(){
-          return publicClient.getItemURL(filename);
+        var path = 'albums/' + filename;
+        return publicClient.storeFile(mimetype, path, data, false).then(function(){
+          return publicClient.getItemURL(path);
         });
       },
-      getPicsListing: function () {
-        return publicClient.getListing('').then(function(objects) {
+      getPicsListing: function (folder) {
+        return publicClient.getListing('albums/' + folder).then(function(objects) {
           return objects;
         });
       },
       getPicURL: function (item) {
-        return publicClient.getItemURL(item);
+        return publicClient.getItemURL('albums/' + item);
       },
       getUuid: function () {
         return publicClient.uuid();
