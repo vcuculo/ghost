@@ -8,7 +8,7 @@ $(document).ready(function () {
   remoteStorage.on('ready', showApp);
   remoteStorage.on('disconnect', hideApp);
 
-  album = remoteStorage.pictures.openPublicAlbum('camera');
+  album = remoteStorage.pictures.openPublicAlbum('Camera');
 
 });
 
