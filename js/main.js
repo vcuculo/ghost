@@ -1,14 +1,15 @@
 /* remotestorage init */
 
+var album;
+
 $(document).ready(function () {
-  remoteStorage.claimAccess({
-    pictures: 'rw'
-  }).then(function () {
-    remoteStorage.displayWidget('remotestorage-connect');
-    remoteStorage.pictures.dontSync();
-    remoteStorage.onWidget('ready', showApp);
-    remoteStorage.onWidget('disconnect', hideApp);
-  });
+  remoteStorage.claimAccess('pictures', 'rw')
+  remoteStorage.displayWidget();
+  remoteStorage.on('ready', showApp);
+  remoteStorage.on('disconnect', hideApp);
+
+  album = remoteStorage.pictures.openPublicAlbum('camera');
+
 });
 
 /* buttons to take and save pictures from webcam */
@@ -45,13 +46,13 @@ $(document).on({
     var value = c.toDataURL(type); // base64encoded picture
     var ab = dataURItoArrayBuffer(value); // arraybuffer picture
     var uuid = remoteStorage.pictures.getUuid().substring(5);
-    var filename = "camera/" + uuid + ".jpg";
+    var filename = uuid + ".jpg";
     $('#photo').fadeOut('slow', function () {
       $('#photo').remove();
     });
     $('#savePhoto').hide();
     $('#album').append('<span id="imagespinner" width="160" height="120"><img src="images/ajax-loader.gif"></span>');
-    remoteStorage.pictures.setPic(filename, type, ab).then(function (url) {
+    album.store(type, filename, ab).then(function (url) {
       $('#imagespinner').remove();
       $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + filename + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '"  width="160" height="120" title="' + filename + '"></img></a>').fadeIn('slow');
       return false;
@@ -61,9 +62,9 @@ $(document).on({
 
 
 function displayPic() {
-  remoteStorage.pictures.getPicsListing('camera/').then(function (objects) {
+  album.list().then(function (objects) {
     objects.forEach(function (item) {
-      var url = remoteStorage.pictures.getPicURL('camera/' + item);
+      var url = albumgetPictureURL(item);
       $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + item + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '" id="' + item + '" width="160" height="120" title="' + item + '"></img></a>');
     });
     $(".fancybox").fancybox();
