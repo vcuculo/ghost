@@ -66,7 +66,7 @@ $(document).on({
 function displayPic() {
   album.list().then(function (objects) {
     objects.forEach(function (item) {
-      var url = albumgetPictureURL(item);
+      var url = album.getPictureURL(item);
       $('#album').append('<a class="fancybox" href="' + url + '" rel="gHost" title="<a href=' + url + ' download=' + item + ' title=\'Download this picture!\'>Download</a>"><img src="' + url + '" id="' + item + '" width="160" height="120" title="' + item + '"></img></a>');
     });
     $(".fancybox").fancybox();
