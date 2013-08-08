@@ -7,7 +7,7 @@
 // unless it starts with a dollar sign ($)
 //
 
-remoteStorage.defineModule('pictures', function(privateClient, publicClient) {
+RemoteStorage.defineModule('pictures', function(privateClient, publicClient) {
 
   var isDir = remoteStorage.util.isDir;
 
@@ -59,7 +59,7 @@ remoteStorage.defineModule('pictures', function(privateClient, publicClient) {
     },
 
     close: function() {
-      this.client.release(this.prefix);
+      this.client.cache(this.prefix, false);
     },
 
     _path: function(fileName) {
@@ -79,11 +79,6 @@ remoteStorage.defineModule('pictures', function(privateClient, publicClient) {
   }
 
   var pictures = {
-
-    init: function() {
-      privateClient.release('');
-      publicClient.release('');
-    },
 
     getUuid: privateClient.uuid,
 

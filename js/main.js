@@ -3,12 +3,10 @@
 var album;
 
 $(document).ready(function () {
-  remoteStorage.claimAccess('pictures', 'rw')
+  remoteStorage.access.claim('pictures', 'rw')
   remoteStorage.displayWidget();
   remoteStorage.on('ready', showApp);
   remoteStorage.on('disconnect', hideApp);
-
-  remoteStorage.pictures.init();
 
   album = remoteStorage.pictures.openPublicAlbum('Camera');
 
