@@ -30,7 +30,7 @@ RemoteStorage.defineModule('pictures', function(privateClient, publicClient) {
     // this.client.use(this.prefix, true);
 
     // Bind all the things
-    remoteStorage.util.bindAll(this);
+    bindAll(this);
   };
 
   Album.prototype = {
