@@ -1,0 +1,46 @@
+<html>
+  
+  <head>
+    <title>gHost - unHosted Photo Album using WebRTC</title>
+    <link href="vendor/jquery.fancybox.css?v=2.1.4" rel="stylesheet"  type="text/css" media="screen" />
+    <link href="vendor/buttons.css" rel="stylesheet" />
+    <link href="css/ghost.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Metal+Mania&text=gHost%20unHosted%20Photo%20Album' rel='stylesheet' type='text/css'>
+    <script src="vendor/remotestorage.min.js"></script>
+    <script src="vendor/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="vendor/jquery.fancybox.pack.js?v=2.1.4" type="text/javascript" ></script>
+    <script src="js/pictures.js" type="text/javascript"></script>
+    <script src="js/main.js"></script>
+  </head>
+  
+  <body>
+    <center>
+      <div id="splash">
+        <img src="images/logo.png"> <span class="title">gHost</span>
+        <span class="subtitle">unHosted Photo Album</span>
+
+      </div>
+      <div id="info">
+        <p><b>gHost</b> is an experimental web application
+        <br>based on HTML5, CSS3 and JavaScript.</p>
+        <p><b>gHost</b> uses
+        <a href="http://jquery.com/" target="_blank">jQuery</a> and two new great technologies called
+        <br>
+        <a href="http://www.webrtc.org/" target="_blank">WebRTC</a> and
+        <a href="http://remotestorage.io/" target="_blank">remoteStorage</a>, used respectively
+        <br>to capture the webcam stream without plugins and
+        <br>to host the pictures taken, leaving users in control of their data.</p>
+        <p style="font: 15px 'Courier New'">/* Author: Vittorio Cuculo */</p>
+        <br>
+        <br>
+      </div>
+      <div id="camerabox" style="display:none">
+        <video id="camFeed" width="320" height="240" autoplay></video>
+        <button class="blue-pill" id="takePhoto" style="display: none">Take Photo</button>
+        <button class="blue-pill" id="savePhoto" style="display: none">Save Photo</button>
+      </div>
+      <img id="spinner" src="images/ajax-loader.gif" style="display:none">
+    </center>
+    <div id="album" style="z-index:1"></div>
+ </body>
+</html>
