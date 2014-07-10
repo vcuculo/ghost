@@ -5,7 +5,8 @@ var album;
 $(document).ready(function () {
   remoteStorage.access.claim('pictures', 'rw');
   remoteStorage.displayWidget();
-  remoteStorage.on('connected', showApp);
+  remoteStorage.on('ready', showApp);
+  //remoteStorage.on('connected', showApp);
   remoteStorage.on('disconnected', hideApp);
 });
 
@@ -131,7 +132,7 @@ function onSuccess(stream) {
     'margin-bottom': '20px',
     'box-shadow': '0 0 50px 10px #fff'
   });
-  $('#camerabox').fadeIn('slow')
+  $('#camerabox').fadeIn('slow');
   $('#takePhoto').show();
 }
 
@@ -151,7 +152,7 @@ function dataURItoArrayBuffer(dataURI) {
   var byteString = atob(dataURI.split(',')[1]);
 
   // separate out the mime component
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
   // write the bytes of the string to an ArrayBuffer
   var ab = new ArrayBuffer(byteString.length);
