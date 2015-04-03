@@ -5,8 +5,8 @@ var album;
 $(document).ready(function () {
   remoteStorage.access.claim('pictures', 'rw');
   remoteStorage.displayWidget();
-  remoteStorage.on('ready', showApp);
-  //remoteStorage.on('connected', showApp);
+  //remoteStorage.on('ready', showApp);
+  remoteStorage.on('connected', showApp);
   remoteStorage.on('disconnected', hideApp);
 });
 
