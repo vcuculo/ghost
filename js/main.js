@@ -3,9 +3,11 @@
 var album;
 
 $(document).ready(function () {
+  var remoteStorage = new RemoteStorage({
+    logging: true  // defaults to false
+  });
   remoteStorage.access.claim('pictures', 'rw');
   remoteStorage.displayWidget();
-  //remoteStorage.on('ready', showApp);
   remoteStorage.on('connected', showApp);
   remoteStorage.on('disconnected', hideApp);
 });
@@ -117,11 +119,11 @@ function init() {
     navigator.webkitGetUserMedia({
       video: true
     }, function (stream) {
-      video.src = window.webkitURL.createObjectURL(stream);
+      video.src = window.URL.createObjectURL(stream);
       onSuccess(stream);
     }, onFail);
   } else {
-    alert('WebRTC is not available on this browser, so you can\'t take pictures. But you can still browse the pictures already in your remoteStorage.');
+    alert('getUserMedia is not available on this browser, so you can\'t take pictures. But you can still browse the pictures already in your remoteStorage.');
   }
 }
 
