@@ -8,8 +8,10 @@ $(document).ready(function () {
   });
   remoteStorage.access.claim('pictures', 'rw');
   remoteStorage.displayWidget();
-  remoteStorage.on('connected', showApp);
-  remoteStorage.on('disconnected', hideApp);
+  remoteStorage.on('ready', function() {
+    remoteStorage.on('connected', showApp);
+    remoteStorage.on('disconnected', hideApp);
+  });
 });
 
 /* buttons to take and save pictures from webcam */
